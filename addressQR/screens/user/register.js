@@ -8,6 +8,8 @@ import {
   Switch,
   Alert,
 } from 'react-native';
+import apiService from '../../apiService';
+import AsyncStorage from '@react-native-community/async-storage';
 
 
 const initialState = {
@@ -35,33 +37,33 @@ const Register = ({navigation, route}) => {
     }));
   };
   const handleSubmit = async () => {
+    setRegisterData(prevState => ({
+      ...prevState,
+      isBusiness,
+    }));
     console.log(registerData);
-    if (!!Object.keys(registerData).filter(key => registerData[key] === '')) {
+    if (!Object.keys(registerData).filter(key => registerData[key] === '')) {
       Alert.alert('not all requiered fields filled');
       return;
     }
     //left here
+    let authToken;
     try {
-      const res = await apiService.create(registerData);
+      authToken = await apiService.create(registerData);
     } catch (error) {
       Alert.alert('Please enter right email/password');
       setRegisterData(() => initialState);
       console.log(error);
       return;
     }
-    const authToken = res;
     try {
       await AsyncStorage.setItem('token', authToken);
-      const user = isBusiness;
-      delete user.password;
-      delete user.repeatpw;
-      await AsyncStorage.setItem('user', user);
     } catch (error) {
       console.log(error);
       Alert.alert('Try again');
       return;
     }
-    user.isBusiness
+    isBusiness
       ? navigation.navigate('Dashboard')
       : navigation.navigate('Scan&Go');
   };
@@ -90,6 +92,7 @@ const Register = ({navigation, route}) => {
         style={styles.input}
         placeholder="email"
         keyboardType="email-address"
+        autoCapitalize="none"
         value={registerData.email}
         onChangeText={text => handleChange({text, name: 'email'})}
       />

@@ -21,20 +21,13 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
       },
-    zipcode: {
+    zipCode: {
         type: String,
         required: true,
       },
-    visited:{
-        bid: {
-          type: String,
-          required: true,
-        },
-        timestamp: {
-          type: Date,
-          default: Date.now(),
-        }
-      },
+    greeting: {
+      type: String,
+    },
     isBusiness: {
         type: Boolean,
         required: true,

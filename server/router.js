@@ -1,10 +1,13 @@
 const router = require('express').Router();
-const { register, login, logout, visited, user } = require('./controller/user');
+const { register, login, logout, visited, visit, userbyid, verifyBusiness } = require('./controller/users');
+const jwtauth  = require('./middleware/auth');
 
 router.post('/register', register)
 router.post('/login', login);
-router.post('logout', logout);
-router.get('/visited', visited);
-router.get('/user', user);
+router.post('/logout', jwtauth, logout);
+router.post('/visit', jwtauth , visit);
+router.get('/visited', jwtauth, visited);
+router.get('/user', jwtauth, userbyid);
+router.post('verify', jwtauth, verifyBusiness)
 
 module.exports = router;

@@ -1,4 +1,5 @@
 
+
 const BASEURL = 'http://localhost:3001';
 
 const apiService = {};
@@ -11,7 +12,7 @@ apiService.create = (user) => {
     headers: {'Content-Type' : 'application/json' },
     body: JSON.stringify(user),
    })
-   .then((res) => res.json())
+   .then((res) => res.text())
    .catch((err) => console.log(err));
 };
 
@@ -23,7 +24,58 @@ apiService.login = (user) => {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(user), 
     })
-    .then((res) => res.json());
+    .then((res) => res.text());
 };
 
+apiService.user = (token) => {
+    return fetch(`${BASEURL}/user`, {
+        method: 'GET',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+         
+    })
+    .then((res) => res.json()); 
+}
+apiService.verify = (bid, token) => {
+    return fetch(`${BASEURL}/verify`, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(bid)
+    })
+    .then((res) => res.json()); 
+}
+apiService.visit = (bid, token) => {
+    return fetch(`${BASEURL}/visit`, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(bid), 
+    })
+    .then((res) => res.json());
+}
+apiService.visited = (token) => {
+    return fetch(`${BASEURL}/visited`, {
+        method: 'GET',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+    })
+    .then((res) => res.json()); 
+}
 export default apiService;

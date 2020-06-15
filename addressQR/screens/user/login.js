@@ -30,31 +30,30 @@ const Login = ({navigation}) => {
       }));
   }
   const handleSubmit = async () => {
-    // if (!loginData.email || !loginData.password) {
-    //     Alert.alert('Password/Login empty')
-    //     return
-    // }
-    // try {
-    //     const res = await apiService.login(loginData);
-    // } catch (error) {
-    //     Alert.alert('Please enter right email/password')
-    //     setLoginData(() => initialState);
-    //     console.log(error);
-    //     return
-    // }
-    //     const authToken = res;
-    //     try {
-    //         await AsyncStorage.setItem('token', authToken);
-    //         const user = await apiService.user(loginData.email);
-    //         await AsyncStorage.setItem('user', user);
-    //     } catch (error) {
-    //         console.log(error);
-    //         Alert.alert('Try again');
-    //         return
-    //     }
-    const user = {
-      isBusiness: false,
+    if (!loginData.email || !loginData.password) {
+        Alert.alert('Password/Login empty')
+        return
     }
+    let res;
+    try {
+        res = await apiService.login(loginData);
+    } catch (error) {
+        Alert.alert('Please enter right email/password')
+        setLoginData(() => initialState);
+        console.log(error);
+        return
+    }
+        
+        let user;
+        try {
+            await AsyncStorage.setItem('token', res);
+            user = await apiService.user(res);
+        } catch (error) {
+            console.warn(error);
+            Alert.alert('Try again');
+            return
+        }
+    
         user.isBusiness? navigation.navigate('Dashboard'): navigation.navigate('ScanGo');    
     }
   let userorbusi = '';
