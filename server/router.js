@@ -8,6 +8,6 @@ router.post('/logout', jwtauth, logout);
 router.post('/visit', jwtauth , visit);
 router.get('/visited', jwtauth, visited);
 router.get('/user', jwtauth, userbyid);
-router.post('verify', jwtauth, verifyBusiness)
+router.post('/verify', jwtauth, verifyBusiness)
 
 module.exports = router;

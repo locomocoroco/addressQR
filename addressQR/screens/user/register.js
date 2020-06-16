@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import apiService from '../../apiService';
 import AsyncStorage from '@react-native-community/async-storage';
+import { Button, Input } from 'react-native-elements';
 
 
 const initialState = {
@@ -87,56 +88,62 @@ const Register = ({navigation, route}) => {
   }
   return (
     <View style={styles.container}>
-      <Text>{registerUserBusi}</Text>
-      <TextInput
-        style={styles.input}
+      <Text style={styles.headerText}>{registerUserBusi}</Text>
+      <Input
+        containerStyle={styles.input}
         placeholder="email"
         keyboardType="email-address"
         autoCapitalize="none"
         value={registerData.email}
         onChangeText={text => handleChange({text, name: 'email'})}
       />
-      <TextInput
-        style={styles.input}
+      <Input
+        containerStyle={styles.input}
         placeholder="password"
         secureTextEntry={true}
         value={registerData.password}
         onChangeText={text => handleChange({text, name: 'password'})}
       />
-      <TextInput
-        style={styles.input}
+      <Input
+        containerStyle={styles.input}
         placeholder="repeat password"
         secureTextEntry={true}
         value={registerData.repeatpw}
         onChangeText={text => handleChange({text, name: 'repeatpw'})}
       />
-      <TextInput
-        style={styles.input}
+      <Input
+        containerStyle={styles.input}
         placeholder={businessName1}
         value={registerData.firstName}
         onChangeText={text => handleChange({text, name: 'firstName'})}
       />
-      <TextInput
-        style={styles.input}
+      <Input
+        containerStyle={styles.input}
         placeholder={shortDescLastName}
         value={registerData.lastName}
         onChangeText={text => handleChange({text, name: 'lastName'})}
       />
-      <TextInput
-        style={styles.input}
+      <Input
+        containerStyle={styles.input}
         placeholder="Address"
         value={registerData.address}
         onChangeText={text => handleChange({text, name: 'address'})}
       />
-      <TextInput
-        style={styles.input}
+      <Input
+        containerStyle={styles.input}
         placeholder="ZipCode"
         value={registerData.zipCode}
         keyboardType="number-pad"
         onChangeText={text => handleChange({text, name: 'zipCode'})}
       />
-      <TouchableOpacity onPress={handleSubmit}>
-        <Text style={styles.submit}>Submit</Text>
+      <TouchableOpacity >
+      <Button
+          title="Submit"
+          type="solid"
+          raised={true}
+          onPress={handleSubmit}
+          buttonStyle={styles.submit}
+        />
       </TouchableOpacity>
       <View style={styles.toggle}>
         <Text style={styles.signUpLink}>
@@ -151,22 +158,25 @@ const Register = ({navigation, route}) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    flex:1,
   },
   input: {
-    borderWidth: 1,
-    borderColor: 'grey',
     padding: 5,
-    marginBottom: 20,
-    width: 195,
+    marginTop: 7,
+    marginBottom: 5,
+    width: 350,
+  },
+  headerText:{
+    marginVertical:15,
   },
   submit: {
-    backgroundColor: 'green',
-    fontSize: 28,
+    fontSize: 35,
     color: 'white',
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 50,
+    marginVertical:7,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: '#00b34f',
   },
   toggle: {
     marginVertical: 10,

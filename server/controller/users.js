@@ -34,6 +34,7 @@ const register = async (req, res) => {
 }
 const login = async (req, res) => {
     const { email, password } = req.body;
+    console.log(email ,password);
     try {
         const user = await userDb.findOne({email});
         if (!user) throw new Error('no user');
@@ -90,11 +91,11 @@ const visit = async (req, res) => {
     }
 };
 const verifyBusiness = async (req, res) => {
-    const {_id} = req.body
+    const {bid} = req.body
     try {
-        const user = await userDb.findById(_id);
+        const user = await userDb.findById(bid);
         user.passwordHash='';
-        if (user.isBusiness) throw new Error('not bid');
+        if (!user.isBusiness) throw new Error('not bid');
         res.status(200).json(user);
     } catch (error) {
         res.status(400).json('could not get user');

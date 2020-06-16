@@ -22,8 +22,8 @@ const Welcome = ({ navigation }) => {
     },[])
     return (
         <View>
-            <Text style={styles.overlay1}>Welcome to AddressQR</Text>
-            <Text style={styles.overlay2}>a Contact Tracing App</Text>
+            <Text style={styles.overlay1}>Welcome to AddressQR a Contact Tracing App</Text>
+            
             <Image
             style={styles.container} 
             source={require('../components/23311.png')}
@@ -46,7 +46,9 @@ const styles = StyleSheet.create({
         bottom:  200, 
         right: 0, 
         left: 7, 
-        zIndex: 1
+        zIndex: 1,
+        flexWrap: 'nowrap',
+        
 
     },
     overlay2: {

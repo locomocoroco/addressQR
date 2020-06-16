@@ -1,6 +1,6 @@
 
 
-const BASEURL = 'http://localhost:3001';
+const BASEURL = 'http://192.168.0.117:7777';
 
 const apiService = {};
 
@@ -49,7 +49,7 @@ apiService.verify = (bid, token) => {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(bid)
+        body: JSON.stringify({bid})
     })
     .then((res) => res.json()); 
 }
@@ -62,7 +62,7 @@ apiService.visit = (bid, token) => {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(bid), 
+        body: JSON.stringify({bid}), 
     })
     .then((res) => res.json());
 }

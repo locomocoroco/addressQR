@@ -1,21 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { View, Text, FlatList, StyleSheet, RefreshControl } from 'react-native';
 import apiService from '../../apiService';
+import { ListItem } from 'react-native-elements'
 
 import VisistsList from '../../components/visitsList';
+import moment from 'moment';
+import AsyncStorage from '@react-native-community/async-storage';
 
 
 const Livefeed = ({ visits }) => {
+    const [isRefreshing, setIsRefreshing] = useState(false);
+    const handleRefresh = useCallback(async () => {
+        setIsRefreshing(true);
+        const token = await AsyncStorage.getItem('token')
+        visits = await apiService.visited(token)
+        setIsRefreshing(false);
+      });
+    
+    const keyExtractor = (item, index) => index.toString();
+    const renderItem = ({item}) => (
+        <ListItem
+        title={item.user.firstName+' '+item.user.lastName}
+        subtitle={item.user.address}
+        rightSubtitle={moment(item.created_at).startOf('hour').fromNow()}
+        bottomDivider
+        // chevron
+        />
+    )
+   
+    
     return (
-        <View>
-            <Text>Feed</Text>
+        <View style={styles.container}>
+            
             
             <FlatList
+            keyExtractor={keyExtractor}
             data={visits}
-            styles={styles.list}
-            renderItem={({ item }) => (
-                <VisistsList item={item} />
-            )} />
+            renderItem={renderItem}
+            refreshControl={
+                <RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />
+            } />
         </View>
         
     )
@@ -25,6 +49,10 @@ const styles = StyleSheet.create({
     list: {
         paddingHorizontal: 10,
         marginVertical: 10,
+        justifyContent: "center",
+    },
+    container:{
+        flex:1
     }
 })
 

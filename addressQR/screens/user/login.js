@@ -8,9 +8,11 @@ import {
   StyleSheet,
   TextInput,
   Alert,
+  Dimensions,
 } from 'react-native';
 import apiService from '../../apiService';
 import AsyncStorage from '@react-native-community/async-storage';
+import { Button, Input } from 'react-native-elements';
 
 const initialState = {
     email: '',
@@ -68,7 +70,7 @@ const Login = ({navigation}) => {
     userorbusi = 'Login for users';
     viewInfobusi = `For businesses go here `;
     unicode = '1F680';
-    registerUserBusi = 'New here register now';
+    registerUserBusi = 'New here, register now';
   }
 
   return (
@@ -78,20 +80,43 @@ const Login = ({navigation}) => {
       </View>
       <View style={styles.container}>
         <Text style={styles.signUpLink}>{userorbusi}</Text>
-        <TextInput style={styles.input} 
+        {/* <TextInput style={styles.input} 
           placeholder="email"
           value={loginData.email}
           autoCapitalize="none"
-          onChangeText={(text) => handleChange({text, name:'email'})} />
-        <TextInput
+          onChangeText={(text) => handleChange({text, name:'email'})} /> */}
+        {/* <TextInput
           style={styles.input}
           placeholder="password"
           secureTextEntry={true}
           value={loginData.password}
           onChangeText={(text) => handleChange({text, name:'password'})}
+        /> */}
+        <Input
+          containerStyle={styles.input}
+          placeholder='email'
+          value={loginData.email}
+          autoCapitalize='none'
+          inputStyle={styles.inputText}
+          onChangeText={(text) => handleChange({text, name:'email'})}
+          />
+          <Input
+          containerStyle={styles.input}
+          placeholder="password"
+          autoCapitalize='none'
+          inputStyle={styles.inputText}
+          secureTextEntry={true}
+          value={loginData.password}
+          onChangeText={(text) => handleChange({text, name:'password'})}
         />
-        <TouchableOpacity onPress={handleSubmit}>
-          <Text style={styles.submit}>Submit</Text>
+        <TouchableOpacity >
+        <Button
+          title="Submit"
+          type="solid"
+          raised={true}
+          onPress={handleSubmit}
+          buttonStyle={styles.submit}
+        />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
@@ -123,19 +148,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignContent: 'space-between',
     justifyContent: 'center',
+    flex: 1,
   },
   text: {
-    fontSize: 36,
+    fontSize: 42,
+    marginTop: 24,
   },
   input: {
-    borderWidth: 1,
-    borderColor: 'grey',
     padding: 5,
     marginBottom: 20,
-    width: 180,
+    width: 350,
+  },
+  inputText: {
+    color:'blue'
   },
   signUpLink: {
-    marginVertical: 10,
+    marginVertical: 45,
   },
   toggle: {
     flexDirection: 'row',
@@ -147,13 +175,14 @@ const styles = StyleSheet.create({
     fontSize: 22,
   },
   submit: {
-    backgroundColor: 'green',
-    fontSize: 28,
+    
+    fontSize: 35,
     color: 'white',
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 35,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: '#00b34f',
+    
   },
 });
 

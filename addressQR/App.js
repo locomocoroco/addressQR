@@ -11,6 +11,7 @@ import Scanned from './screens/user/scanned';
 import Dashboard from './screens/business/dashboard';
 import ViewQR from './screens/business/viewQR';
 import Welcome from './screens/welcome';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Stack = createStackNavigator();
 
@@ -26,7 +27,10 @@ const App = () => {
     <NavigationContainer ref={navigationRef}>
     <Stack.Navigator>
       <Stack.Screen name='Welcome'component={Welcome}/>
-      <Stack.Screen name='Login' component={Login} />
+      <Stack.Screen name='Login' component={Login} 
+      options={{
+    headerLeft: null
+      }}/>
       <Stack.Screen name='Register' component={Register} />
       <Stack.Screen name='ScanGo' component={ScanGo} options=        
       {{headerTransparent: true,
@@ -39,7 +43,10 @@ const App = () => {
               'Do you really want to Logout?',
                 [{
                   text: 'Logout',
-                  onPress: () => navigate('Login',{})
+                  onPress: () => {
+                    AsyncStorage.removeItem('token');
+                    navigate('Login',{})
+                  }
                 },
                 {
                   text: 'Cancel',
