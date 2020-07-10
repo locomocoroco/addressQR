@@ -21,7 +21,7 @@ const initialState = {
   lastName: '',
   address: '',
   zipCode: '',
-  isBusiness: '',
+  isBusiness: false,
 };
 
 const Register = ({navigation, route}) => {
@@ -35,6 +35,7 @@ const Register = ({navigation, route}) => {
     setRegisterData(prevState => ({
       ...prevState,
       [name]: text,
+      isBusiness,
     }));
   };
   const handleSubmit = async () => {
@@ -66,7 +67,7 @@ const Register = ({navigation, route}) => {
     }
     isBusiness
       ? navigation.navigate('Dashboard')
-      : navigation.navigate('Scan&Go');
+      : navigation.navigate('ScanGo');
   };
   let registerUserBusi;
   let businessName1;

@@ -22,7 +22,7 @@ const Livefeed = ({ visits }) => {
         <ListItem
         title={item.user.firstName+' '+item.user.lastName}
         subtitle={item.user.address}
-        rightSubtitle={moment(item.created_at).startOf('hour').fromNow()}
+        rightSubtitle={moment(item.createdAt).startOf('hour').fromNow()}
         bottomDivider
         // chevron
         />

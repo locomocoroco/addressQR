@@ -28,13 +28,12 @@ const visitSchema = mongoose.Schema({
           },
         zipcode: {
             type: String,
-            required: true,
           },
         isBusiness: {
             type: Boolean,
             required: true,
           },
     }
-})
+}, { timestamps: true})
 
 module.exports = mongoose.model('visit', visitSchema);

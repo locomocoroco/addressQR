@@ -34,12 +34,8 @@ const Dashboard = ({navigation}) => {
         //setIsLoading(false);
     },[])
 
-    return (
-      isLoading? 
-      <View>
-        <Text>Is Loading...</Text>
-      </View> :  
-      <Tab.Navigator >
+    return ( 
+      <Tab.Navigator tabBarOptions={{labelStyle: styles.label}}>
          <Tab.Screen name="LiveFeed" options={{title: 'LiveFeed'}} >
          {(props) =>  <Livefeed {...props} visits={visits} />}
          </Tab.Screen>
@@ -57,6 +53,9 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    label: {
+        fontSize:21,
     }
 });
 
