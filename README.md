@@ -37,15 +37,17 @@ Starting the Server:
 Starting the client:
 -> You can use Xcode or Android Studio for a guided experience
 -> or i would refer you to the CLI docs: https://reactnative.dev/docs/environment-setup
-
+```
 5. Have fun with it!
 
 
 ## Techstack
+```
 React-Native
 MongoDB
 mongoose
 QRCode technology
+```
 
 ## Author
 Nils Wernecke - [Github](https://github.com/locomocoroco) - [LinkedIn](https://www.linkedin.com/in/niwern/)
