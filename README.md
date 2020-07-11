@@ -19,7 +19,7 @@ git pull https://github.com/locomocoroco/addressQR.git
 npm install or yarn install
 ```
 
-3. Place your .env into root
+3. Place your .env in root
 ```
 !!!Replace values!!!
 NODE_ENV= development || production
