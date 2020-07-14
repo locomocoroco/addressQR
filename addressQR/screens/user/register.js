@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {
   Text,
+  ScrollView,
   View,
   TextInput,
   StyleSheet,
@@ -88,7 +89,7 @@ const Register = ({navigation, route}) => {
     shortDescLastName = 'Last Name';
   }
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.headerText}>{registerUserBusi}</Text>
       <Input
         containerStyle={styles.input}
@@ -152,13 +153,13 @@ const Register = ({navigation, route}) => {
         </Text>
         <Switch value={isBusiness} onValueChange={handleUpdate} />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    //alignItems: 'center',
     flex:1,
   },
   input: {
