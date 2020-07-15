@@ -29,7 +29,7 @@ const Livefeed = ({ visits }) => {
     )
    
     
-    return (
+    return isRefreshing? <View>Loading...</View>:(
         <View style={styles.container}>
             
             
